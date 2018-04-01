@@ -6,8 +6,10 @@ const SEARCH = "SEARCH";
 const SEARCH_PENDING = "SEARCH_PENDING";
 const SEARCH_FULFILLED = "SEARCH_FULFILLED";
 const SEARCH_REJECTED = "SEARCH_REJECTED";
+const CHANGE_PAGE = "CHANGE_PAGE";
 
 const initialState = {
+  page: 1,
   searchingKeyword: "",
   searchResult: {
     total: 0,
@@ -35,6 +37,7 @@ export default (state = initialState, action) => {
           total: data.total,
           totalPages: data.total_pages,
           results: data.results.map(e=>({
+            id: e.id,
             author: e.user.name,
             desc: e.description,
             src: e.urls.regular,
@@ -47,6 +50,10 @@ export default (state = initialState, action) => {
       return {
         ...state, loading: false
       }
+    case CHANGE_PAGE:
+      return {
+        ...state, page: action.page
+      }
     default:
       return state;
   }
@@ -57,12 +64,17 @@ export const typeSearch = (keyword) => ({
   keyword
 });
 
-export const search = (keyword) => ({
+export const search = (keyword, page) => ({
   type: SEARCH,
   payload: API.get({
     path: "/search/photos",
     data: {
-      query: keyword, page: 1, per_page: 12
+      query: keyword, page: page || 1, per_page: 12
     }
   })
+});
+
+export const changePage = (page) => ({
+  type: CHANGE_PAGE,
+  page
 });

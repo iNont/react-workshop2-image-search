@@ -5,15 +5,21 @@ import './Search.css';
 
 import ImageCard from './ImageCard/ImageCard';
 import LoadingOverlay from '../../common/LoadingOverlay';
+import Pagination from '../../common/Pagination/Pagination';
 
 export class Search extends Component {
   typeSearch(event) {
     this.props.typeSearch(event.target.value);
   }
 
-  search() {
-    this.props.search(this.props.searchingKeyword);
+  search(page) {
+    this.props.search(this.props.searchingKeyword, page);
   }
+
+  changePage(page) {
+    this.props.changePage(page);
+    this.search(page);
+	}
 
   onKeyPress(event) {
     if(event.key === 'Enter') {
@@ -38,7 +44,10 @@ export class Search extends Component {
             </div>
           </div>
           <div className="Search-result-container">
-            {this.props.searchResult.results.map((e,i)=><ImageCard {...e} key={i} />)}
+            {this.props.searchResult.results.map((e,i)=><ImageCard {...e} key={e.id+i} />)}
+          </div>
+          <div className="Search-result-pagination">
+            <Pagination page={this.props.page} totalPage={this.props.searchResult.totalPages} onChange={this.changePage.bind(this)}/>
           </div>
           <LoadingOverlay show={this.props.loading} />
         </div>
