@@ -1,12 +1,16 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import * as Action from './redux';
+
+import LoadingOverlay from '../../common/LoadingOverlay';
+
 class Search extends Component {
   render() {
     return (
-      <div>
-        Search
-      </div>
+      <section className="section">
+        <p onClick={()=>this.props.setState({loading: true})}>Search</p>
+        <LoadingOverlay show={this.props.loading} />
+      </section>
     );
   }
 }

@@ -2,7 +2,7 @@ const SET_STATE = "SET_STATE";
 const RESET_STATE = "RESET_STATE";
 
 const initialState = {
-
+  loading: false
 };
 
 export default (state = initialState, action) => {

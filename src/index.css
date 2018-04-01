@@ -3,3 +3,35 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.LoadingOverlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: white;
+  opacity: 0;
+  z-index: 1000;
+  pointer-events: none;
+  transition: all 0.3s;
+}
+.LoadingOverlay.show {
+  opacity: 0.9;
+  pointer-events: auto;
+}
+.LoadingOverlay::before {
+  content: '';
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: solid 8px forestGreen;
+  border-left-color: darkGreen;
+  animation: rotating-anim infinite 1s linear;
+}
+
+@keyframes rotating-anim {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
