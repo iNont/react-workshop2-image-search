@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import * as Action from './redux';
+import * as Actions from './redux';
 
 import LoadingOverlay from '../../common/LoadingOverlay';
 
-class Search extends Component {
+export class Search extends Component {
   render() {
     return (
       <section className="section">
@@ -15,4 +15,4 @@ class Search extends Component {
   }
 }
 
-export default connect(state => state, Action)(Search);
+export default connect(state => state, Actions)(Search);

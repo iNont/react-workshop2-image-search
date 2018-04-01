@@ -23,7 +23,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "mocha -r ignore-styles -r babel-core/app --exit test",
+    "test": "mocha -r ignore-styles -r babel-core/register --exit test",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
