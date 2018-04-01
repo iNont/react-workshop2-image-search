@@ -8,7 +8,7 @@ export class Search extends Component {
   render() {
     return (
       <section className="section">
-        <p onClick={()=>this.props.setState({loading: true})}>Search</p>
+        <p onClick={()=>this.props.search("keyword")}>Search</p>
         <LoadingOverlay show={this.props.loading} />
       </section>
     );

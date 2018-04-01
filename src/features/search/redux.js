@@ -1,29 +1,45 @@
-const SET_STATE = "SET_STATE";
-const RESET_STATE = "RESET_STATE";
+import TestData from '../../TestData';
+
+const SEARCH = "SEARCH";
+const SEARCH_PENDING = "SEARCH_PENDING";
+const SEARCH_FULFILLED = "SEARCH_FULFILLED";
+const SEARCH_REJECTED = "SEARCH_REJECTED";
 
 const initialState = {
+  searchingKeyword: "",
+  searchResult: {
+    total: 0,
+    totalPages: 0,
+    results: []
+  },
   loading: false
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case SET_STATE:
+    case SEARCH_PENDING:
       return {
-      ...state,
-      ...action.state
-    };
-    case RESET_STATE:
-      return initialState;
+        ...state,
+        loading: true
+      }
+    case SEARCH_FULFILLED:
+      return {
+        ...state,
+        searchResult: {
+          total: TestData.total,
+          totalPages: TestData.total_pages,
+          results: TestData.results
+        },
+        loading: false
+      }
     default:
       return state;
   }
 }
 
-export const setState = (state) => ({
-  type: SET_STATE,
-  state
-});
-
-export const resetState = () => ({
-  type: RESET_STATE
+export const search = (keyword) => ({
+  type: SEARCH,
+  payload: new Promise((resolve, reject) =>{
+    setTimeout(()=>resolve(), 1000);
+  })
 });
