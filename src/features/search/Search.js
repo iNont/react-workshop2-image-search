@@ -13,12 +13,13 @@ export class Search extends Component {
   }
 
   search(page) {
-    this.props.search(this.props.searchingKeyword, page);
+    this.props.changePage(1);
+    this.props.search(this.props.searchingKeyword);
   }
 
   changePage(page) {
     this.props.changePage(page);
-    this.search(page);
+    this.props.search(this.props.searchingKeyword, page);
 	}
 
   onKeyPress(event) {

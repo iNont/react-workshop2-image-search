@@ -71,7 +71,8 @@ export const search = (keyword, page) => ({
     data: {
       query: keyword, page: page || 1, per_page: 12
     }
-  })
+  }),
+  page
 });
 
 export const changePage = (page) => ({
