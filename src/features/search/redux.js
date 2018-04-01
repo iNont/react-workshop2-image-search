@@ -1,5 +1,6 @@
 import TestData from '../../TestData';
 
+const TYPE_SEARCH = "TYPE_SEARCH";
 const SEARCH = "SEARCH";
 const SEARCH_PENDING = "SEARCH_PENDING";
 const SEARCH_FULFILLED = "SEARCH_FULFILLED";
@@ -17,6 +18,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case TYPE_SEARCH:
+      return {
+        ...state,
+        searchingKeyword: action.keyword
+      }
     case SEARCH_PENDING:
       return {
         ...state,
@@ -36,6 +42,11 @@ export default (state = initialState, action) => {
       return state;
   }
 }
+
+export const typeSearch = (keyword) => ({
+  type: TYPE_SEARCH,
+  keyword
+});
 
 export const search = (keyword) => ({
   type: SEARCH,
