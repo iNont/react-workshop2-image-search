@@ -1,4 +1,5 @@
 import TestData from '../../TestData';
+import API from '../../utils/API';
 
 const TYPE_SEARCH = "TYPE_SEARCH";
 const SEARCH = "SEARCH";
@@ -20,23 +21,29 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case TYPE_SEARCH:
       return {
-        ...state,
-        searchingKeyword: action.keyword
+        ...state, searchingKeyword: action.keyword
       }
     case SEARCH_PENDING:
       return {
-        ...state,
-        loading: true
+        ...state, loading: true
       }
     case SEARCH_FULFILLED:
+      let data = action.payload.data;
       return {
         ...state,
         searchResult: {
-          total: TestData.total,
-          totalPages: TestData.total_pages,
-          results: TestData.results
+          total: data.total,
+          totalPages: data.total_pages,
+          results: data.results.map(e=>({
+            desc: e.description,
+            src: e.urls.regular
+          }))
         },
         loading: false
+      }
+    case SEARCH_REJECTED:
+      return {
+        ...state, loading: false
       }
     default:
       return state;
@@ -49,8 +56,15 @@ export const typeSearch = (keyword) => ({
 });
 
 export const search = (keyword) => ({
-  type: SEARCH,
-  payload: new Promise((resolve, reject) =>{
-    setTimeout(()=>resolve(), 1000);
-  })
+  type: SEARCH_FULFILLED,
+  // payload: API.get({
+  //   path: "/search/photos",
+  //   data: {
+  //     query: keyword, page: 1, per_page: 12
+  //   },
+  //   success: response => response
+  // })
+  payload: {
+    data: TestData
+  }
 });

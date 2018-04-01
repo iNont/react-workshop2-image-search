@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import 'bulma/css/bulma.css';
+import 'bulma/css/bulma.css';
 import './index.css';
 import { Provider } from 'react-redux';
 import promiseMiddleware from 'redux-promise-middleware';

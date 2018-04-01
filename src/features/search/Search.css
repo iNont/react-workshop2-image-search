@@ -1,0 +1,14 @@
+.container {
+  width: 900px;
+  padding: 50px;
+  background-color: white;
+  border-radius: 15px;
+}
+
+.Search-result-container {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 200px;
+  margin-top: 20px;
+  margin: 20px -10px 0 -10px;
+}

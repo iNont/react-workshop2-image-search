@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import * as Actions from './redux';
+import './Search.css';
 
+import ImageCard from './ImageCard/ImageCard';
 import LoadingOverlay from '../../common/LoadingOverlay';
 
 export class Search extends Component {
@@ -9,12 +11,30 @@ export class Search extends Component {
     this.props.typeSearch(event.target.value);
   }
 
+  search() {
+    this.props.search(this.props.searchingKeyword);
+  }
+
   render() {
     return (
       <section className="section">
-        <input onChange={this.typeSearch.bind(this)} />
-        <p onClick={()=>this.props.search("keyword")}>Search</p>
-        <LoadingOverlay show={this.props.loading} />
+        <div className="container">
+          <div className="field has-addons">
+            <div className="control is-expanded">
+              <input className="input" type="text" placeholder="Search images"
+                onChange={this.typeSearch.bind(this)} />
+            </div>
+            <div className="control">
+              <a className="button is-info" onClick={this.search.bind(this)}>
+                Search
+              </a>
+            </div>
+          </div>
+          <div className="Search-result-container">
+            {this.props.searchResult.results.map((e,i)=><ImageCard {...e} key={i} />)}
+          </div>
+          <LoadingOverlay show={this.props.loading} />
+        </div>
       </section>
     );
   }
