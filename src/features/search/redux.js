@@ -35,6 +35,7 @@ export default (state = initialState, action) => {
           total: data.total,
           totalPages: data.total_pages,
           results: data.results.map(e=>({
+            author: e.user.name,
             desc: e.description,
             src: e.urls.regular
           }))
@@ -56,15 +57,11 @@ export const typeSearch = (keyword) => ({
 });
 
 export const search = (keyword) => ({
-  type: SEARCH_FULFILLED,
-  // payload: API.get({
-  //   path: "/search/photos",
-  //   data: {
-  //     query: keyword, page: 1, per_page: 12
-  //   },
-  //   success: response => response
-  // })
-  payload: {
-    data: TestData
-  }
+  type: SEARCH,
+  payload: API.get({
+    path: "/search/photos",
+    data: {
+      query: keyword, page: 1, per_page: 12
+    }
+  })
 });
