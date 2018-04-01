@@ -37,7 +37,8 @@ export default (state = initialState, action) => {
           results: data.results.map(e=>({
             author: e.user.name,
             desc: e.description,
-            src: e.urls.regular
+            src: e.urls.regular,
+            link: e.links.html
           }))
         },
         loading: false
